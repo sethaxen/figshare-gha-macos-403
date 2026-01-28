@@ -1,0 +1,18 @@
+name: Test figshare access
+on: [push, workflow_dispatch]
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macOS-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Get runner info
+        run: |
+          echo "=== Egress IP ==="
+          curl -s https://ifconfig.me || true
+          echo ""
+      - name: Test figshare download
+        run: |
+          echo "=== Downloading from ndownloader.figshare.com ==="
+          curl -v -L -o /dev/null "https://ndownloader.figshare.com/files/53391239" 2>&1
