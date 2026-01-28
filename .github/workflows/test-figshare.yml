@@ -6,6 +6,9 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest, macOS-latest]
     runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
     steps:
       - name: Get runner info
         run: |
@@ -15,4 +18,4 @@ jobs:
       - name: Test figshare download
         run: |
           echo "=== Downloading from ndownloader.figshare.com ==="
-          curl -v -L -o /dev/null "https://ndownloader.figshare.com/files/53391239" 2>&1
+          curl -fv -L -o /dev/null "https://ndownloader.figshare.com/files/53391239" 2>&1
